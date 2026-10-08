@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html><head><title>PocketSmart AI</title>
+<style>body{font-family:Arial;padding:20px;background:#f5f5f5}.card{background:white;padding:20px;margin:10px;border-radius:10px;box-shadow:0 2px 5px #ccc} input,select{padding:8px;margin:5px;width:200px} button{background:#6c5ce7;color:white;padding:10px 20px;border:none;border-radius:5px;cursor:pointer}</style>
+</head><body>
+<h1>PocketSmart AI - Smart Budget Assistant</h1>
+<div class="card"><h3>🏠 Home Interior Planner</h3>
+<form onsubmit="callAPI(event,'/generate-home','home-res')"><input name="budget" placeholder="Budget Rs." required><select name="room_type"><option>Living Room</option><option>Bedroom</option><option>Kitchen</option></select><button>Generate</button></form><pre id="home-res"></pre></div>
+<div class="card"><h3>🎉 Party Planner</h3>
+<form onsubmit="callAPI(event,'/generate-party','party-res')"><input name="budget" placeholder="Budget" required><input name="guests" placeholder="Guests" required><select name="event_type"><option>Birthday</option><option>Wedding</option><option>Corporate</option></select><button>Generate</button></form><pre id="party-res"></pre></div>
+<div class="card"><h3>💍 Jewelry Planner</h3>
+<form onsubmit="callAPI(event,'/generate-jewelry','jewel-res')"><input name="budget" placeholder="Budget" required><input name="occasion" placeholder="Occasion" required><input name="style" placeholder="Style" required><button>Generate</button></form><pre id="jewel-res"></pre></div>
+<script>
+async function callAPI(e, url, resId){
+e.preventDefault(); const formData = new FormData(e.target);
+const res = await fetch(url,{method:'POST',body:formData}); const data = await res.json();
+document.getElementById(resId).innerText = data.result;
+}
+</script></body></html>
